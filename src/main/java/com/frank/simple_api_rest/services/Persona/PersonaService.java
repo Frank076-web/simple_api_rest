@@ -1,6 +1,7 @@
 package com.frank.simple_api_rest.services.Persona;
 
 import com.frank.simple_api_rest.entities.Persona;
+import com.frank.simple_api_rest.exeptionshandler.persona.PersonaNotFoundExeption;
 import com.frank.simple_api_rest.repositories.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,8 +24,12 @@ public class PersonaService implements IPersonaService{
     }
 
     @Override
-    public Persona findById(Long id) throws Exception {
-        return null;
+    public Persona findById(Long id) throws PersonaNotFoundExeption {
+        try {
+            return repository.findById(id).get();
+        } catch (Exception e) {
+            throw  new PersonaNotFoundExeption(id, e.getMessage());
+        }
     }
 
     @Override
