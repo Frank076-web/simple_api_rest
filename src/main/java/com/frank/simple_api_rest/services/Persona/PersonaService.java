@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PersonaService implements IPersonaService{
@@ -27,7 +28,8 @@ public class PersonaService implements IPersonaService{
     @Override
     public Persona findById(Long id) throws PersonaNotFoundExeption {
         try {
-            return repository.findById(id).get();
+            Optional<Persona> entity = repository.findById(id);
+            return entity.get();
         } catch (Exception e) {
             throw  new PersonaNotFoundExeption(id, e.getMessage());
         }
