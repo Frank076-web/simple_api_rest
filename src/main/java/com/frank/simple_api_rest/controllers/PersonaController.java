@@ -24,7 +24,7 @@ public class PersonaController {
             List<Persona> personas = personaService.findAll();
             return PersonaResponseEntity.buildResponse(HttpStatus.OK, personas, "Founded");
         } catch (Exception e) {
-            return PersonaResponseEntity.buildResponse(HttpStatus.NOT_FOUND, e.getMessage());
+            return PersonaResponseEntity.buildResponse(HttpStatus.NOT_FOUND, "Error, no se pudo encontrar. Por favor intente de nuevo mas tarde");
         }
     }
 
@@ -34,7 +34,17 @@ public class PersonaController {
             Persona persona = personaService.findById(id);
             return PersonaResponseEntity.buildResponse(HttpStatus.OK, persona, "Founded");
         } catch (Exception e) {
-            return PersonaResponseEntity.buildResponse(HttpStatus.NOT_FOUND, e.getMessage());
+            return PersonaResponseEntity.buildResponse(HttpStatus.NOT_FOUND, "Error, no se pudo encontrar la persona solicitada. Por favor intente de nuevo mas tarde");
+        }
+    }
+
+    @PostMapping("")
+    public ResponseEntity<Object> save(@RequestBody Persona entity) {
+        try {
+            Persona persona = personaService.save(entity);
+            return PersonaResponseEntity.buildResponse(HttpStatus.OK, persona, "Founded");
+        } catch (Exception e) {
+            return PersonaResponseEntity.buildResponse(HttpStatus.BAD_REQUEST, "Error, no se pudo guardar. Por favor intente de nuevo mas tarde");
         }
     }
 
