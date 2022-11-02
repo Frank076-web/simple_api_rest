@@ -58,4 +58,14 @@ public class PersonaController {
         }
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> delete(Long id) {
+        try {
+            personaService.delete(id);
+            return PersonaResponseEntity.buildResponse(HttpStatus.NO_CONTENT, "Eliminado correctamente");
+        } catch (Exception e) {
+            return PersonaResponseEntity.buildResponse(HttpStatus.BAD_REQUEST, "Error, no se pudo eliminar. Por favor intente de nuevo mas tarde");
+        }
+    }
+
 }
