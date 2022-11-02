@@ -9,6 +9,7 @@ import com.frank.simple_api_rest.repositories.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +20,7 @@ public class PersonaService implements IPersonaService {
     private PersonaRepository repository;
 
     @Override
+    @Transactional
     public List<Persona> findAll() throws Exception {
         try {
             return repository.findAll();
@@ -28,6 +30,7 @@ public class PersonaService implements IPersonaService {
     }
 
     @Override
+    @Transactional
     public Persona findById(Long id) throws PersonaNotFoundExeption {
         try {
             Optional<Persona> entity = repository.findById(id);
@@ -38,6 +41,7 @@ public class PersonaService implements IPersonaService {
     }
 
     @Override
+    @Transactional
     public Persona save(Persona entity) throws PersonaNotSavedExeption {
         try {
             return repository.save(entity);
@@ -47,6 +51,7 @@ public class PersonaService implements IPersonaService {
     }
 
     @Override
+    @Transactional
     public Persona update(Persona entity) throws PersonaNotUpdatedExeption {
         try {
             if (repository.existsById(entity.getIdPersona())) {
@@ -60,6 +65,7 @@ public class PersonaService implements IPersonaService {
     }
 
     @Override
+    @Transactional
     public Boolean delete(Long id) throws Exception {
         try {
             if (repository.existsById(id)) {
