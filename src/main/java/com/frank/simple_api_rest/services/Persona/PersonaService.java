@@ -49,8 +49,11 @@ public class PersonaService implements IPersonaService {
     @Override
     public Persona update(Persona entity) throws PersonaNotUpdatedExeption {
         try {
-            Persona persona = this.findById(entity.getIdPersona());
-            return repository.save(entity);
+            if (repository.existsById(entity.getIdPersona())) {
+                return repository.save(entity);
+            } else {
+                throw new Exception();
+            }
         } catch (Exception e) {
             throw new PersonaNotUpdatedExeption(entity.getIdPersona(), e.getMessage(), e.getCause());
         }
