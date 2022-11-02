@@ -10,7 +10,7 @@ public interface BaseService<T> {
 
     T save(T entitie) throws Exception;
 
-    T update (Long id, T entitie) throws Exception;
+    T update (T entitie) throws Exception;
 
     Boolean delete(Long id) throws  Exception;
 }

@@ -3,6 +3,7 @@ package com.frank.simple_api_rest.services.Persona;
 import com.frank.simple_api_rest.entities.Persona;
 import com.frank.simple_api_rest.exeptionshandler.persona.PersonaNotFoundExeption;
 import com.frank.simple_api_rest.exeptionshandler.persona.PersonaNotSavedExeption;
+import com.frank.simple_api_rest.exeptionshandler.persona.PersonaNotUpdatedExeption;
 import com.frank.simple_api_rest.repositories.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,17 +37,22 @@ public class PersonaService implements IPersonaService{
     }
 
     @Override
-    public Persona save(Persona entitie) throws PersonaNotSavedExeption {
+    public Persona save(Persona entity) throws PersonaNotSavedExeption {
         try {
-            return repository.save(entitie);
+            return repository.save(entity);
         } catch (Exception e) {
             throw new PersonaNotSavedExeption(e.getMessage(), e.getCause());
         }
     }
 
     @Override
-    public Persona update(Long id, Persona entitie) throws Exception {
-        return null;
+    public Persona update(Persona entity) throws PersonaNotUpdatedExeption {
+        try {
+            Persona persona = this.findById(entity.getIdPersona());
+            return repository.save(entity);
+        } catch (Exception e) {
+            throw new PersonaNotUpdatedExeption(entity.getIdPersona(), e.getMessage(), e.getCause());
+        }
     }
 
     @Override
