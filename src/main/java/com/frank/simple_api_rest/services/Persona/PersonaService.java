@@ -2,6 +2,7 @@ package com.frank.simple_api_rest.services.Persona;
 
 import com.frank.simple_api_rest.entities.Persona;
 import com.frank.simple_api_rest.exeptionshandler.persona.PersonaNotFoundExeption;
+import com.frank.simple_api_rest.exeptionshandler.persona.PersonaNotSavedExeption;
 import com.frank.simple_api_rest.repositories.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,8 +34,12 @@ public class PersonaService implements IPersonaService{
     }
 
     @Override
-    public Persona save(Persona entitie) throws Exception {
-        return null;
+    public Persona save(Persona entitie) throws PersonaNotSavedExeption {
+        try {
+            return repository.save(entitie);
+        } catch (Exception e) {
+            throw new PersonaNotSavedExeption(e.getMessage(), e.getCause());
+        }
     }
 
     @Override
