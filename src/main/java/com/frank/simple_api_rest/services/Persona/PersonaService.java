@@ -1,14 +1,25 @@
 package com.frank.simple_api_rest.services.Persona;
 
 import com.frank.simple_api_rest.entities.Persona;
+import com.frank.simple_api_rest.repositories.PersonaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class PersonaService implements IPersonaService{
+
+    @Autowired
+    private PersonaRepository repository;
 
     @Override
     public List<Persona> findAll() throws Exception {
-        return null;
+        try {
+            return repository.findAll();
+        } catch (Exception e) {
+            throw  new Exception(e.getMessage(), e.getCause());
+        }
     }
 
     @Override
