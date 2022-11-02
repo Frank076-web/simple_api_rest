@@ -22,7 +22,7 @@ public class PersonaController {
     public ResponseEntity<Object> getAll(){
         try {
             List<Persona> personas = personaService.findAll();
-            return PersonaResponseEntity.buildResponse(HttpStatus.OK, personas, "Founded");
+            return PersonaResponseEntity.buildResponse(HttpStatus.OK, personas, "Encontrado");
         } catch (Exception e) {
             return PersonaResponseEntity.buildResponse(HttpStatus.NOT_FOUND, "Error, no se pudo encontrar. Por favor intente de nuevo mas tarde");
         }
@@ -32,7 +32,7 @@ public class PersonaController {
     public ResponseEntity<Object> getOne(@PathVariable Long id) {
         try {
             Persona persona = personaService.findById(id);
-            return PersonaResponseEntity.buildResponse(HttpStatus.OK, persona, "Founded");
+            return PersonaResponseEntity.buildResponse(HttpStatus.OK, persona, "Encontrado");
         } catch (Exception e) {
             return PersonaResponseEntity.buildResponse(HttpStatus.NOT_FOUND, "Error, no se pudo encontrar la persona solicitada. Por favor intente de nuevo mas tarde");
         }
@@ -42,9 +42,19 @@ public class PersonaController {
     public ResponseEntity<Object> save(@RequestBody Persona entity) {
         try {
             Persona persona = personaService.save(entity);
-            return PersonaResponseEntity.buildResponse(HttpStatus.OK, persona, "Founded");
+            return PersonaResponseEntity.buildResponse(HttpStatus.CREATED, persona, "Guardado correctamente");
         } catch (Exception e) {
             return PersonaResponseEntity.buildResponse(HttpStatus.BAD_REQUEST, "Error, no se pudo guardar. Por favor intente de nuevo mas tarde");
+        }
+    }
+
+    @PutMapping("")
+    public ResponseEntity<Object> update(@RequestBody Persona entity) {
+        try {
+            Persona persona = personaService.update(entity);
+            return PersonaResponseEntity.buildResponse(HttpStatus.OK, persona, "Actualizado correctamente");
+        } catch (Exception e) {
+            return PersonaResponseEntity.buildResponse(HttpStatus.BAD_REQUEST, "Error, no se pudo actualizar. Por favor intente de nuevo mas tarde");
         }
     }
 
