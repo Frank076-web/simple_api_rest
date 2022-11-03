@@ -12,13 +12,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/api/v1/autores")
-public class AutorControllerImpl extends BaseControllerImpl<Autor, Long> {
-
-    @Autowired
-    private AutorServiceImpl service;
-
-    public AutorControllerImpl(BaseService<Autor, Long> service) {
-        super(service);
-    }
-
+public class AutorControllerImpl extends BaseControllerImpl<Autor, AutorServiceImpl> {
 }
