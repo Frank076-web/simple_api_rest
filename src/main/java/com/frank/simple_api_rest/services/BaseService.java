@@ -1,16 +1,19 @@
 package com.frank.simple_api_rest.services;
 
+import com.frank.simple_api_rest.entities.Base;
+
+import java.io.Serializable;
 import java.util.List;
 
-public interface BaseService<T> {
+public interface BaseService<E extends Base, ID extends Serializable> {
 
-    List<T> findAll() throws Exception;
+    List<E> findAll() throws Exception;
 
-    T findById(Long id) throws Exception;
+    E findById(ID id) throws Exception;
 
-    T save(T entitie) throws Exception;
+    E save(E entitie) throws Exception;
 
-    T update (T entitie) throws Exception;
+    E update (E entitie) throws Exception;
 
-    Boolean delete(Long id) throws  Exception;
+    Boolean delete(ID id) throws  Exception;
 }
