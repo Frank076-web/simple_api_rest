@@ -8,11 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.Serializable;
 import java.util.List;
 
-@RestController
-@CrossOrigin(origins = "*")
 abstract public class BaseControllerImpl<E extends BaseEntity, S extends BaseServiceImpl<E, Long>> implements BaseController<E, Long> {
 
     @Autowired
@@ -42,9 +39,9 @@ abstract public class BaseControllerImpl<E extends BaseEntity, S extends BaseSer
     public ResponseEntity<Object> save(@RequestBody E entity) {
         try {
             E baseEntity = service.save(entity);
-            return BaseResponseEntity.buildResponse(HttpStatus.CREATED, entity, "Guardado correctamente");
+            return BaseResponseEntity.buildResponse(HttpStatus.CREATED, baseEntity, "Guardado correctamente");
         } catch (Exception e) {
-            return BaseResponseEntity.buildResponse(HttpStatus.BAD_REQUEST, "Error, no se pudo guardar. Por favor intente de nuevo mas tarde " + e.getMessage());
+            return BaseResponseEntity.buildResponse(HttpStatus.BAD_REQUEST, "Error, no se pudo guardar. Por favor intente de nuevo mas tarde " + e.getCause());
         }
     }
 
