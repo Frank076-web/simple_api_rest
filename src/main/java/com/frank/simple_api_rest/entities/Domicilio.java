@@ -6,9 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.envers.Audited;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "domicilio")
@@ -24,5 +22,9 @@ public class Domicilio extends BaseEntity{
 
     @Column(name = "numero")
     private Integer numero;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "idLocalidad")
+    private Localidad localidad;
 
 }

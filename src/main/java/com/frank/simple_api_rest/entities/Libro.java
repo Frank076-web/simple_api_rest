@@ -6,9 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.envers.Audited;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "libro")
@@ -30,5 +29,8 @@ public class Libro extends BaseEntity{
 
     @Column(name = "paginas")
     private Integer paginas;
+
+    @ManyToMany(cascade = CascadeType.REFRESH)
+    private List<Autor> autor;
 
 }
