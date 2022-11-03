@@ -6,16 +6,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.envers.Audited;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
-@Table(name = "persona")
+@Table(name = "autor")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Audited
-public class Persona extends BaseEntity {
+public class Autor extends BaseEntity {
 
     @Column(name = "nombre")
     private String nombre;
@@ -23,7 +25,7 @@ public class Persona extends BaseEntity {
     @Column(name = "apellido")
     private String apellido;
 
-    @Column(name = "dni")
-    private Integer dni;
+    @Column(name = "biografia", length = 1500)
+    private String biografia;
 
 }
