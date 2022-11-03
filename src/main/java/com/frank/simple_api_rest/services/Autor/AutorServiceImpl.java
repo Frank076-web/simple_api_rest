@@ -5,7 +5,9 @@ import com.frank.simple_api_rest.repositories.AutorRepository;
 import com.frank.simple_api_rest.repositories.BaseRepository;
 import com.frank.simple_api_rest.services.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AutorServiceImpl extends BaseServiceImpl<Autor, Long> implements AutorService {
 
     @Autowired
