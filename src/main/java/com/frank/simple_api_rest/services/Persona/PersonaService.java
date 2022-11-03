@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PersonaService extends BaseServiceImpl<Persona, Long> {
+public class PersonaService extends BaseServiceImpl<Persona, Long> implements IPersonaService {
 
     @Autowired
     private PersonaRepository repository;
