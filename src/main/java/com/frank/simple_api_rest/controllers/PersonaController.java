@@ -1,71 +1,21 @@
 package com.frank.simple_api_rest.controllers;
 
 import com.frank.simple_api_rest.entities.Persona;
-import com.frank.simple_api_rest.responses.PersonaResponseEntity;
+import com.frank.simple_api_rest.services.BaseService;
 import com.frank.simple_api_rest.services.Persona.PersonaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/api/v1/personas")
-public class PersonaController {
+@RequestMapping("/personas")
+public class PersonaController extends BaseController<Persona, Long> {
 
     @Autowired
     private PersonaServiceImpl personaServiceImpl;
 
-    @GetMapping("")
-    public ResponseEntity<Object> getAll(){
-        try {
-            List<Persona> personas = personaServiceImpl.findAll();
-            return PersonaResponseEntity.buildResponse(HttpStatus.OK, personas, "Encontrado");
-        } catch (Exception e) {
-            return PersonaResponseEntity.buildResponse(HttpStatus.NOT_FOUND, "Error, no se pudo encontrar. Por favor intente de nuevo mas tarde");
-        }
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Object> getOne(@PathVariable Long id) {
-        try {
-            Persona persona = personaServiceImpl.findById(id);
-            return PersonaResponseEntity.buildResponse(HttpStatus.OK, persona, "Encontrado");
-        } catch (Exception e) {
-            return PersonaResponseEntity.buildResponse(HttpStatus.NOT_FOUND, "Error, no se pudo encontrar la persona solicitada. Por favor intente de nuevo mas tarde");
-        }
-    }
-
-    @PostMapping("")
-    public ResponseEntity<Object> save(@RequestBody Persona entity) {
-        try {
-            Persona persona = personaServiceImpl.save(entity);
-            return PersonaResponseEntity.buildResponse(HttpStatus.CREATED, persona, "Guardado correctamente");
-        } catch (Exception e) {
-            return PersonaResponseEntity.buildResponse(HttpStatus.BAD_REQUEST, "Error, no se pudo guardar. Por favor intente de nuevo mas tarde");
-        }
-    }
-
-    @PutMapping("")
-    public ResponseEntity<Object> update(@RequestBody Persona entity) {
-        try {
-            Persona persona = personaServiceImpl.update(entity);
-            return PersonaResponseEntity.buildResponse(HttpStatus.OK, persona, "Actualizado correctamente");
-        } catch (Exception e) {
-            return PersonaResponseEntity.buildResponse(HttpStatus.BAD_REQUEST, "Error, no se pudo actualizar. Por favor intente de nuevo mas tarde");
-        }
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Object> delete(@PathVariable Long id) {
-        try {
-            personaServiceImpl.delete(id);
-            return PersonaResponseEntity.buildResponse(HttpStatus.OK, "Eliminado correctamente");
-        } catch (Exception e) {
-            return PersonaResponseEntity.buildResponse(HttpStatus.BAD_REQUEST, "Error, no se pudo eliminar. Por favor intente de nuevo mas tarde");
-        }
+    public PersonaController(BaseService<Persona, Long> service) {
+        super(service);
     }
 
 }

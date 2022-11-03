@@ -7,7 +7,6 @@ import lombok.Setter;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "persona")
@@ -16,7 +15,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Audited
-public class Persona extends Base {
+public class Persona extends BaseEntity {
 
     @Column(name = "nombre")
     private String nombre;

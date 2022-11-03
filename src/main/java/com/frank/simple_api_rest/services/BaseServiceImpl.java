@@ -1,6 +1,6 @@
 package com.frank.simple_api_rest.services;
 
-import com.frank.simple_api_rest.entities.Base;
+import com.frank.simple_api_rest.entities.BaseEntity;
 import com.frank.simple_api_rest.repositories.BaseRepository;
 
 import javax.transaction.Transactional;
@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
-abstract public class BaseServiceImpl<E extends Base, ID extends Serializable> implements BaseService<E, ID> {
+abstract public class BaseServiceImpl<E extends BaseEntity, ID extends Serializable> implements BaseService<E, ID> {
 
     protected BaseRepository<E, ID> repository;
 

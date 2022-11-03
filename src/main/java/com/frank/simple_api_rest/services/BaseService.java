@@ -1,11 +1,11 @@
 package com.frank.simple_api_rest.services;
 
-import com.frank.simple_api_rest.entities.Base;
+import com.frank.simple_api_rest.entities.BaseEntity;
 
 import java.io.Serializable;
 import java.util.List;
 
-public interface BaseService<E extends Base, ID extends Serializable> {
+public interface BaseService<E extends BaseEntity, ID extends Serializable> {
 
     List<E> findAll() throws Exception;
 
